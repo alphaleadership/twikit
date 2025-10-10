@@ -144,6 +144,7 @@ class Client:
 
         tid = self.client_transaction.generate_transaction_id(method=method, path=urlparse(url).path)
         headers['X-Client-Transaction-Id'] = tid
+        headers['User-Agent'] = self._user_agent
 
         cookies_backup = self.get_cookies().copy()
         response = await self.http.request(method, url, headers=headers, **kwargs)
