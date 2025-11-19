@@ -144,6 +144,7 @@ class Client:
 
         tid = self.client_transaction.generate_transaction_id(method=method, path=urlparse(url).path)
         headers['X-Client-Transaction-Id'] = tid
+        headers['User-Agent'] = self._user_agent
 
         cookies_backup = self.get_cookies().copy()
         response = await self.http.request(method, url, headers=headers, **kwargs)
@@ -1523,7 +1524,7 @@ class Client:
                 results.append(tweet)
 
         if entries[-1]['entryId'].startswith('cursor'):
-            next_cursor = entries[-1]['content']['itemContent']['value']
+            next_cursor = entries[-1]['content']['value']
             _fetch_next_result = partial(self._get_more_replies, tweet_id, next_cursor)
         else:
             next_cursor = None
@@ -1632,7 +1633,7 @@ class Client:
 
         if entries[-1]['entryId'].startswith('cursor'):
             # if has more replies
-            reply_next_cursor = entries[-1]['content']['itemContent']['value']
+            reply_next_cursor = entries[-1]['content']['value']
             _fetch_more_replies = partial(self._get_more_replies,
                                           tweet_id, reply_next_cursor)
         else:
