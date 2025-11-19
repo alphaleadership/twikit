@@ -126,7 +126,7 @@ class Client:
 
         self._token = TOKEN
         self._user_id = None
-        self._user_agent = user_agent or 'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_6_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15'
+        self._user_agent = user_agent or 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0'
         self._act_as = None
 
         self.gql = GQLClient(self)
